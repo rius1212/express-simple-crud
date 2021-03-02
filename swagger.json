@@ -1,0 +1,130 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0", 
+        "title": "Project Backend",
+        "license": {"name": "MIT","url": "https://opensource.org/licenses/MIT"}
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [{
+        "name": "API List",
+        "description": "API list in the system"
+    }],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+
+    "paths": {
+        "/api/v1/employees": {
+            "get": {
+                "tags": ["Employees"],
+                "summary": "Get all Employees in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Employees"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/addemployees": {
+            "post": {
+                "tags": ["Employees"],
+                "description": "Create new Employees in system",
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Employees that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Employees"
+                    }
+                }],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New employees is created",
+                        "schema": {
+                            "$ref": "#/definitions/Employees"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/{id}": {
+            "parameters": [{
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of Employees that we want to find",
+                "type": "integer"
+            }],
+            "put": {
+                "summary": "Update Employees with give ID",
+                "tags": ["Employees"],
+                "parameters": [{
+                    "name": "Employees",
+                    "in": "body",
+                    "description": "Employees with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Employees"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Employees is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Employees"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Employees with given ID",
+                "tags": ["Employees"],
+                "responses": {
+                    "200": {
+                        "description": "Employees is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Employees"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Employees with given ID",
+                "tags": ["Employees"],
+                "responses": {
+                    "200": {
+                        "description": "Employees",
+                        "schema": {
+                            "$ref": "#/definitions/Employees"
+                        }
+                    }
+                }
+            }
+        }
+       
+    },
+    "definitions": {
+        "Employees": {
+            "required": ["nama","no_telepon","alamat"],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nama": {
+                    "type": "string"
+                },
+                "no_telepon": {
+                    "type": "string"
+                },
+                "alamat": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
